@@ -39,17 +39,17 @@ function onClickModal(event) {
       `<img src="${event.target.dataset.source}" width="800" height="600"/>` 
     );
     instance.show();
-  
-    document.addEventListener('keydown', event => instanceClose(event, instance));
+
+    const instanceClose = (event) => {
+      if(event.key === 'Escape') {
+        instance.close();
+        document.removeEventListener('keydown', this);
+      }
+    }
+    document.addEventListener('keydown', instanceClose);
   }
 }
 
-const instanceClose = (event, instance) => {
-  if(event.key === 'Escape') {
-    instance.close();
-    document.removeEventListener('keydown', instanceClose);
-  }
-}
 
 console.log(galleryItems);
 
